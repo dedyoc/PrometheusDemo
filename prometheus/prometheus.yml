@@ -1,3 +1,5 @@
+rule_files:
+  - "/etc/prometheus/rule_files/alert.rules.yml"
 scrape_configs:
   - job_name: 'app-metrics'
     metrics_path: '/actuator/prometheus'

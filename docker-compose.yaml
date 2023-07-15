@@ -3,6 +3,8 @@ services:
     image: prom/prometheus:latest
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/rule_files:/etc/prometheus/rule_files
+      - prometheus_data:/prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
     ports:
@@ -11,6 +13,8 @@ services:
     image: "grafana/grafana"
     ports:
       - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana  # Mount 'grafana_data' volume onto /var/lib/grafana in the container
     container_name: grafana
   mysqldb:
     image: mysql:8.0
@@ -20,3 +24,6 @@ services:
     ports:
       - "3307:3306"
     container_name: mysqldb
+volumes:
+  grafana_data: {}
+  prometheus_data: {}

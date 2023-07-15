@@ -1,0 +1,11 @@
+groups:
+  - name: example
+    rules:
+      - alert: HighHttpRequestsError500
+        expr: increase(http_server_requests_seconds_count{status="500"}[1m]) > 50
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          description: 'There have been more than 50 HTTP 500 responses in the last minute.'
+          summary: High HTTP 500 response rate
